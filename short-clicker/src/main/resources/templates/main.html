@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+</head>
+<body>
+<form action="#" th:action="@{/main}" th:object="${urlSubmit}" method="post">
+  <p>Введите ссылку:</p>
+  <label title="Введите ссылку">
+    <input type="text" th:field="*{url}">
+  </label>
+  <th:block th:if="${shortUrl} == null">
+      <input type="submit">
+  </th:block>
+    <th:block th:unless="${shortUrl} == null">
+        <input type="submit" disabled>
+    </th:block>
+</form>
+<th:block th:if="${shortUrl} != null">
+    <p th:text="'Ваша ссылка: ' + ${shortUrl.getUrl()}"/>
+    <form action="#" th:action="@{/main}" method="get">
+        <input type="submit" value="Вернуться">
+    </form>
+</th:block>
+</body>
+</html>
